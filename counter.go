@@ -38,7 +38,7 @@ type Storage struct {
 	f *os.File
 }
 
-// Initialize storage, loaf
+// Initialize storage
 func (s *Storage) Init() {
 	f, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE, 0644)
 	if err != nil {
@@ -47,7 +47,7 @@ func (s *Storage) Init() {
 	s.f = f
 }
 
-// Convert counter value to bytes, save and close
+// Convert counter value to bytes, save it and close file
 func (s *Storage) SaveCounterAndClose(c Counter) {
 	b := make([]byte, 8)
 	binary.LittleEndian.PutUint64(b, c.Value())
@@ -71,7 +71,7 @@ func (s *Storage) LoadCounter(c Counter) {
 	log.Printf("Counter value is %v\n", cnt.value)
 }
 
-// catch SIGINT/SIGTERN and call cleanuo()
+// catch SIGINT/SIGTERN and call cleanup()
 func configureSignals() {
 	ch := make(chan os.Signal)
 	signal.Notify(ch, os.Interrupt, syscall.SIGTERM)
