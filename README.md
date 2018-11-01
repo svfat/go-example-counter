@@ -1,3 +1,4 @@
+Usage:
 ```
 git clone git@github.com:svfat/go-example-counter.git
 cd go-example-counter
